@@ -833,6 +833,45 @@ export function CybersecurityAssessmentForm() {
                         <p className="text-gray-700 mb-6">
                           Select the categories and areas you want to include in your assessment. Each area shows the number of questions it contains.
                         </p>
+                        <div className="mb-4">
+                          <Button
+                            onClick={() => {
+                              // Check if all categories are currently selected
+                              const allCategoriesSelected = selectedCategories.length === ALL_CATEGORIES.length;
+                              const allAreasSelected = selectedAreas.length === Object.values(CATEGORIES_WITH_AREAS).flat().length;
+                              
+                              if (allCategoriesSelected && allAreasSelected) {
+                                // If all are selected, deselect all
+                                setSelectedCategories([]);
+                                setSelectedAreas([]);
+                                setExpandedCategories([]);
+                              } else {
+                                // If not all are selected, select all
+                                setSelectedCategories(ALL_CATEGORIES);
+                                setSelectedAreas(Object.values(CATEGORIES_WITH_AREAS).flat());
+                                setExpandedCategories(ALL_CATEGORIES);
+                              }
+                            }}
+                            className={cn(
+                              "px-6 py-2 rounded-lg font-semibold shadow-lg transform transition-all duration-200 hover:scale-105",
+                              selectedCategories.length === ALL_CATEGORIES.length && selectedAreas.length === Object.values(CATEGORIES_WITH_AREAS).flat().length
+                                ? "bg-red-600 hover:bg-red-700 text-white"
+                                : "bg-green-600 hover:bg-green-700 text-white"
+                            )}
+                          >
+                            {selectedCategories.length === ALL_CATEGORIES.length && selectedAreas.length === Object.values(CATEGORIES_WITH_AREAS).flat().length ? (
+                              <>
+                                <Check className="w-4 h-4 mr-2" />
+                                Deselect All Categories & Areas
+                              </>
+                            ) : (
+                              <>
+                                <Check className="w-4 h-4 mr-2" />
+                                Select All Categories & Areas
+                              </>
+                            )}
+                          </Button>
+                        </div>
                         <div className="space-y-3">
                           {ALL_CATEGORIES.map((category) => {
                             const areas = CATEGORIES_WITH_AREAS[category] || [];

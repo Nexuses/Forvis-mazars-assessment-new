@@ -13,7 +13,10 @@ const ROLES = [
   "IT representative",
   "System owner",
   "Provider of technical support",
-  "System developer"
+  "System developer",
+  "Business owner",
+  "Business representative",
+  "Other"
 ];
 
 interface RoleDropdownProps {

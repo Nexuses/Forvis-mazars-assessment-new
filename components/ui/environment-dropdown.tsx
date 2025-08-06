@@ -13,7 +13,11 @@ const ENVIRONMENT_TYPES = [
   "Security management",
   "A critical business application",
   "A computer installation",
-  "A network"
+  "A network",
+  "System under development",
+  "An end user environment",
+  "A service provider",
+  "Other"
 ];
 
 interface EnvironmentDropdownProps {
