@@ -363,9 +363,13 @@ export function CybersecurityAssessmentForm() {
 
     try {
       const totalAnswered = Object.keys(answers).length;
-      const totalPossibleScore = totalAnswered * 5; // Assuming 5 is the highest score
+      const totalPossibleScore = totalAnswered * 4; // Assuming 4 is the highest score (0-4 scale)
       const totalScore = Object.values(answers).reduce(
-        (sum, value) => sum + parseInt(value),
+        (sum, value) => {
+          const numValue = parseInt(value);
+          // Convert 1-5 scale to 0-4 scale: subtract 1 from each value
+          return sum + (numValue >= 1 && numValue <= 5 ? numValue - 1 : 0);
+        },
         0
       );
       const percentageScore = totalPossibleScore > 0 ? Math.round((totalScore / totalPossibleScore) * 100) : 0;
